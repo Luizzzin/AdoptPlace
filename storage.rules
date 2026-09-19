@@ -1,0 +1,28 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return signedIn()
+          && firestore.exists(/databases/(default)/documents/users/$(request.auth.uid))
+          && firestore.get(/databases/(default)/documents/users/$(request.auth.uid))
+              .data.roles.hasAny(['admin']);
+    }
+
+    function ownsAnimal(animalId) {
+      return signedIn()
+          && firestore.exists(/databases/(default)/documents/animals/$(animalId))
+          && firestore.get(/databases/(default)/documents/animals/$(animalId))
+              .data.createdBy == request.auth.uid;
+    }
+
+    match /animals/{animalId}/{fileName} {
+      allow read: if true;
+      allow write: if ownsAnimal(animalId) || isAdmin();
+    }
+  }
+}
