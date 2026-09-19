@@ -1,0 +1,77 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return signedIn()
+          && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+          && get(/databases/$(database)/documents/users/$(request.auth.uid))
+              .data.roles.hasAny(['admin']);
+    }
+
+    function ownsAnimal(animalId) {
+      return signedIn()
+          && exists(/databases/$(database)/documents/animals/$(animalId))
+          && get(/databases/$(database)/documents/animals/$(animalId))
+              .data.createdBy == request.auth.uid;
+    }
+
+    match /users/{userId} {
+      allow get: if signedIn() && (request.auth.uid == userId || isAdmin());
+      allow list: if isAdmin();
+
+      allow create: if signedIn()
+          && request.auth.uid == userId
+          && request.resource.data.uid == request.auth.uid
+          && request.resource.data.roles is list
+          && request.resource.data.roles.hasOnly(['adopter', 'donor']);
+
+      allow update: if signedIn()
+          && request.auth.uid == userId
+          && request.resource.data.uid == resource.data.uid
+          && request.resource.data.roles == resource.data.roles
+          && request.resource.data.diff(resource.data).affectedKeys()
+              .hasOnly(['name', 'email', 'phone', 'photoUrl', 'updatedAt']);
+
+      allow delete: if signedIn() && (request.auth.uid == userId || isAdmin());
+    }
+
+    match /animals/{animalId} {
+      allow read: if true;
+      allow create: if signedIn()
+          && request.resource.data.createdBy == request.auth.uid;
+      allow update, delete: if signedIn()
+          && (resource.data.createdBy == request.auth.uid || isAdmin())
+          && (request.method == 'delete'
+              || (request.resource.data.createdBy == resource.data.createdBy
+                  && request.resource.data.createdAt == resource.data.createdAt));
+    }
+
+    match /adoptionRequests/{requestId} {
+      allow create: if signedIn()
+          && request.resource.data.adopterId == request.auth.uid
+          && request.resource.data.status == 'pending'
+          && ownsAnimal(request.resource.data.animalId)
+              == (request.resource.data.donorId == request.auth.uid);
+
+      allow get, list: if signedIn()
+          && (resource.data.adopterId == request.auth.uid
+              || resource.data.donorId == request.auth.uid
+              || isAdmin());
+
+      allow update: if signedIn()
+          && (isAdmin()
+              || (resource.data.donorId == request.auth.uid
+                  && request.resource.data.diff(resource.data).affectedKeys()
+                      .hasOnly(['status', 'updatedAt']))
+              || (resource.data.adopterId == request.auth.uid
+                  && request.resource.data.status == 'cancelled'
+                  && request.resource.data.diff(resource.data).affectedKeys()
+                      .hasOnly(['status', 'updatedAt'])));
+    }
+  }
+}
