@@ -1,3 +1,4 @@
+import 'package:adopt_place/telaInicial.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:adopt_place/cao.dart';
@@ -85,18 +86,76 @@ class TelaFeedState extends State<TelaFeed> {
 																		child: IntrinsicHeight(
 																			child: Row(
 																				children: [
-																					Container(
-																						margin: const EdgeInsets.only( right: 37),
-																						width: 80,
-																						height: 80,
-																						child:Image.asset('assets/feedDefault/dogIcon.png'),
-																					),
-																					Container(
-																						width: 80,
-																						height: 80,
-																						child: Image.asset('assets/feedDefault/pawIcon.png')
-																						
-																					),
+																					Padding(
+                                            padding: const EdgeInsets.only(
+                                              right: 35,
+                                            ),
+                                            child: TextButton(
+                                              style: TextButton.styleFrom(
+                                                padding: EdgeInsets.zero,
+                                              ),
+                                              onPressed: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const TelaFeed(),
+                                                  ),
+                                                );
+                                              },
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Image.asset(
+                                                    'assets/feedDefault/dogIcon.png',
+                                                    width: 80,
+                                                    height: 80,
+                                                  ),
+                                                  const Text(
+                                                    'Pets',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          TextButton(
+                                            style: TextButton.styleFrom(
+                                              padding: EdgeInsets.zero,
+                                            ),
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const TelaInicial(),
+                                                ),
+                                              );
+                                            },
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Image.asset(
+                                                  'assets/feedDefault/pawIcon.png',
+                                                  width: 80,
+                                                  height: 80,
+                                                ),
+                                                const Text(
+                                                  'Produtos',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
 																				]
 																			),
 																		),
@@ -105,43 +164,7 @@ class TelaFeedState extends State<TelaFeed> {
 															),
 														),
 													),
-													IntrinsicHeight(
-														child: Container(
-															margin: const EdgeInsets.only( bottom: 20),
-															width: double.infinity,
-															child: Column(
-																children: [
-																	IntrinsicWidth(
-																		child: IntrinsicHeight(
-																			child: Row(
-																				children: [
-																					Container(
-																						margin: const EdgeInsets.only( right: 72),
-																						child: Text(
-																							"Pets",
-																							style: TextStyle(
-																								color: Color(0xFFFFFFFF),
-																								fontSize: 14,
-																								fontWeight: FontWeight.bold,
-																							),
-																						),
-																					),
-																					Text(
-																						"Produtos",
-																						style: TextStyle(
-																							color: Color(0xFFFFFFFF),
-																							fontSize: 14,
-																							fontWeight: FontWeight.bold,
-																						),
-																					),
-																				]
-																			),
-																		),
-																	),
-																]
-															),
-														),
-													),
+													
 													Container(
 														margin: const EdgeInsets.only( bottom: 48, left: 36),
 														child: Text(
@@ -153,17 +176,6 @@ class TelaFeedState extends State<TelaFeed> {
 															),
 														),
 													),
-                            Container(
-                            margin: const EdgeInsets.only(bottom: 12, left: 36),
-                            child: Text(
-                              "Feed de pets a espera de um dono:",
-                              style: TextStyle(
-                                color: Color(0xFFFFFFFF),
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
                           StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                             stream: FirebaseFirestore.instance.collection('caes').snapshots(),
                             builder: (context, snapshot) {

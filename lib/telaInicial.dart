@@ -116,41 +116,41 @@ class TelaInicialState extends State<TelaInicial> {
                       ),
                   ),
                   Positioned(
-    left: 55,
-    top: 746,
-    child: SizedBox(
-        width: 291,
-        height: 57,
-        child: Material(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(28.50),
-            ),
-            child: InkWell(
-                customBorder: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(28.50),
-                ),
-                onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const TelaFeed()),
-                    );
-                },
-                child: Center(
-                    child: Text(
-                        'Vamos lá!',
-                        style: TextStyle(
-                            color: const Color(0xFFEE562F),
-                            fontSize: 32,
-                            fontFamily: 'Red Hat Display',
-                            fontWeight: FontWeight.w700,
+                    left: 55,
+                    top: 746,
+                    child: SizedBox(
+                        width: 291,
+                        height: 57,
+                        child: Material(
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(28.50),
+                            ),
+                            child: InkWell(
+                                customBorder: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(28.50),
+                                ),
+                                onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => const TelaFeed()),
+                                    );
+                                },
+                                child: Center(
+                                    child: Text(
+                                        'Vamos lá!',
+                                        style: TextStyle(
+                                            color: const Color(0xFFEE562F),
+                                            fontSize: 32,
+                                            fontFamily: 'Red Hat Display',
+                                            fontWeight: FontWeight.w700,
+                                        ),
+                                    ),
+                                ),
+                            ),
                         ),
                     ),
                 ),
-            ),
-        ),
-    ),
-),
                   Positioned(
                       left: 33,
                       top: 548,
