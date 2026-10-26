@@ -5,12 +5,14 @@ class Produto {
   final String nome;
   final String preco;
   final String imagem;
+  final String descricao;
 
   Produto({
     required this.id,
     required this.nome,
     required this.preco,
     required this.imagem,
+    required this.descricao,
   });
 
   factory Produto.fromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {
@@ -20,6 +22,7 @@ class Produto {
       nome: data['nome'] ?? 'Sem nome',
       preco: data['preco'] ?? 'Sem preço',
       imagem: data['imagem'] ?? '',
+      descricao: data['descricao'] ?? 'Sem Descrição!',
     );
   }
 }

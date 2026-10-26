@@ -6,6 +6,7 @@ class Cao {
   final String idade;
   final String temperamento;
   final String imagem;
+  final String descricao;
 
   Cao({
     required this.id,
@@ -13,6 +14,7 @@ class Cao {
     required this.idade,
     required this.temperamento,
     required this.imagem,
+    required this.descricao,
   });
 
   factory Cao.fromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {
@@ -23,6 +25,7 @@ class Cao {
       idade: data['idade'] ?? 'Sem idade',
       temperamento: data['temperamento'] ?? '',
       imagem: data['imagem'] ?? '',
+      descricao: data['descricao']?? 'sem Descrição',
     );
   }
 }
