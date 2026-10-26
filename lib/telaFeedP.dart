@@ -1,8 +1,8 @@
+import 'package:adopt_place/cardProduto.dart';
+import 'package:adopt_place/produto.dart';
 import 'package:adopt_place/telaFeed.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:adopt_place/cao.dart';
-import 'package:adopt_place/cardCao.dart';
 class TelaFeedP extends StatefulWidget {
 	const TelaFeedP({super.key});
 	@override
@@ -56,7 +56,7 @@ class TelaFeedState extends State<TelaFeedP> {
 													Container(
 														margin: const EdgeInsets.only( bottom: 7, left: 32),
 														child: Text(
-															"Bem-vindo ! 👋",
+															"Produtos pet🐶",
 															style: TextStyle(
 																color: Color(0xFFFFFFFF),
 																fontSize: 32,
@@ -168,7 +168,7 @@ class TelaFeedState extends State<TelaFeedP> {
 													Container(
 														margin: const EdgeInsets.only( bottom: 48, left: 36),
 														child: Text(
-															"Feed de pets a espera de um dono:",
+															"Produtos pet para cuidados do seu melhor amigo:",
 															style: TextStyle(
 																color: Color(0xFFFFFFFF),
 																fontSize: 14,
@@ -177,7 +177,7 @@ class TelaFeedState extends State<TelaFeedP> {
 														),
 													),
                           StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                            stream: FirebaseFirestore.instance.collection('caes').snapshots(),
+                            stream: FirebaseFirestore.instance.collection('produtos').snapshots(),
                             builder: (context, snapshot) {
                               if (snapshot.hasError) {
                                 return Padding(
@@ -198,7 +198,7 @@ class TelaFeedState extends State<TelaFeedP> {
                                 return const Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 32),
                                   child: Text(
-                                    'Nenhum cão cadastrado.',
+                                    'Nenhum produto cadastrado.',
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 );
@@ -206,7 +206,7 @@ class TelaFeedState extends State<TelaFeedP> {
                               return Padding(
                                 padding: const EdgeInsets.fromLTRB(32, 0, 32, 32),
                                 child: Column(
-                                  children: docs.map((d) => CardCao(cao: Cao.fromDoc(d))).toList(),
+                                  children: docs.map((d) => CardProduto(produto: Produto.fromDoc(d))).toList(),
                                 ),
                               );
                             },

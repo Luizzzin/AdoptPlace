@@ -18,7 +18,7 @@ class Produto {
     return Produto(
       id: doc.id,
       nome: data['nome'] ?? 'Sem nome',
-      preco: data['preço'] ?? 'Sem preço',
+      preco: data['preco'] ?? 'Sem preço',
       imagem: data['imagem'] ?? '',
     );
   }
