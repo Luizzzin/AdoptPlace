@@ -2,9 +2,9 @@
 
 ## Integrantes:
 
-- Luiz Henrique Barbosa Dias - RM: 562399
-- Gregory Debom Ferreira - RM: 562346
-- Rodrigo Kenshin Viana Matayoshi - RM: 564026
+- Luiz Henrique Barbosa Dias - RM: 562399 (Responsavel pelo banco de dados e conexão)
+- Gregory Debom Ferreira - RM: 562346 (Idealizador e design figma)
+- Rodrigo Kenshin Viana Matayoshi - RM: 564026 (Responsavel por Auxiliar as tarefas em geral)
 
 ---
 
@@ -29,6 +29,45 @@ O **Adopt Place** resolve esse problema centralizando, em um só lugar, a divulg
 - **Perfil de ONGs**: cadastro e gerenciamento dos pets disponíveis, com upload de fotos e atualização de status (disponível, em processo, adotado).
 - **Filtros de busca**: por espécie, porte, idade, localização e situação, facilitando encontrar o pet ideal.
 - **Acompanhamento de status**: usuário pode ver se seu interesse está em análise, aprovado ou pet já adotado por outra pessoa.
+
+## Como rodar o projeto:
+O Adopt Place é um app Flutter que usa o Firebase (Cloud Firestore) como banco de dados e foi testado no navegador (Chrome).
+
+Para executá-lo, é preciso ter o Flutter SDK e o Google Chrome instalados. 
+
+Clone o repositório, entre na pasta do projeto e baixe as dependências com flutter pub get. 
+
+A conexão com o Firebase é feita pelo arquivo lib/firebase_options.dart, que já acompanha o repositório e aponta para o projeto adoptplace. 
+
+Se ele não estiver presente, gere-o com o FlutterFire CLI (flutterfire configure --project=adoptplace, selecionando a plataforma web). 
+
+O Firestore precisa ter as coleções caes (campos nome, idade, temperamento, imagem e descricao) e produtos (campos nome, preco, imagem e descricao), e as regras do banco devem permitir a leitura dessas coleções. 
+
+Com tudo pronto, execute flutter run -d chrome e o app abrirá na tela inicial, de onde é possível acessar o feed de pets e de produtos e abrir a página de detalhes de cada item.
+
+```
+git clone <url-do-repositorio>
+cd adoptPlace
+cd AdoptPlace
+flutter pub get
+flutter run -d chrome
+```
+>Observação: o app não foi configurado para Windows desktop, e o build para essa plataforma exige o Firebase C++ SDK e o Visual Studio. Use o Chrome para rodar.
+>É preferivel o uso do APK que se encontra em releases
+---
+
+## Decisões técnicas
+
+| Área | Decisão | Justificativa |
+|---|---|---|
+| Banco de dados | Firebase (Cloud Firestore) | [por que o grupo escolheu: ex.: NoSQL flexível para cards de pets, integração nativa com Flutter, plano gratuito] |
+| Armazenamento de imagens | Firebase Storage | Fotos dos pets enviadas pelas ONGs, mantidas no mesmo ecossistema do Firestore |
+| Autenticação | Não implementada no CP5 | Foco no fluxo de telas; dados de usuário/ONG mockados. Planejada para o CP6 |
+| Gerenciamento de estado | setState (por enquanto) | Suficiente para o protótipo; avaliar Provider no CP6 se o estado compartilhado crescer |
+| Navegação | Navigator padrão (push/pop) | Simples e suficiente para o fluxo principal |
+| Ambiente de teste | Chrome (Flutter web) | Execução rápida, sem depender de emulador |
+
+- Firebase: [ex.: lista de pets e produtos no Firestore, fotos no Storage]
 
 ---
 
