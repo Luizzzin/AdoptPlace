@@ -1,4 +1,4 @@
-import 'package:adopt_place/telaInicial.dart';
+import 'package:adopt_place/telaFeedP.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:adopt_place/cao.dart';
@@ -133,7 +133,7 @@ class TelaFeedState extends State<TelaFeed> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      const TelaInicial(),
+                                                      const TelaFeedP(),
                                                 ),
                                               );
                                             },
