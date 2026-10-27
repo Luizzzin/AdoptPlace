@@ -2,9 +2,11 @@
 
 ## Integrantes:
 
-- Luiz Henrique Barbosa Dias - RM: 562399 (Responsavel pelo banco de dados e conexão)
-- Gregory Debom Ferreira - RM: 562346 (Idealizador e design figma)
-- Rodrigo Kenshin Viana Matayoshi - RM: 564026 (Responsavel por Auxiliar as tarefas em geral)
+|             **NOME**            | **RM** | **TURMA** |              **RESPONSABILIDADES**             |
+|:-------------------------------:|:------:|:---------:|:----------------------------------------------:|
+|    Luiz Henrique Barbosa Dias   | 562399 |   2CCPO   |   (Responsavel pelo banco de dados e conexão)  |
+|      Gregory Debom Ferreira     | 562346 |   2CCPO   |          (Idealizador e design figma)          |
+| Rodrigo Kenshin Viana Matayoshi | 564026 |   2CCPH   | (Responsavel por Auxiliar as tarefas em geral) |
 
 ---
 
